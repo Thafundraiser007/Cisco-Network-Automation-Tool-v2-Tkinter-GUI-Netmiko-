@@ -1,0 +1,48 @@
+what i improved from version 1
+
+Switch Support
+-Added show interfaces status — port up/down/speed/duplex
+-Added show mac address-table — MAC to port mapping
+-Added show etherchannel summary — port-channel/LAG info
+-Added show interfaces trunk — trunk port details
+-Commands only valid on L3 devices are tagged [L3] in the UI
+
+GUI (Tkinter)
+-All commands are clickable buttons — no typing required
+-Device selector is a dropdown menu
+-Connect / Disconnect buttons
+-Live connection status indicator
+-Color-coded output panel (purple headers, green success, red errors, blue info)
+-Clear Output button
+-Status bar at the bottom showing what the tool is doing
+
+Error Handling		
+-Catches NetmikoAuthenticationException for bad credentials
+-Catches NetmikoTimeoutException for unreachable hosts
+-Catches general exceptions so the app doesn't crash
+
+Threading
+-Connect and command execution run in background threads so the UI doesn't freeze while waiting for a response
+
+Logging
+-One log file per session instead of one file per command
+
+Device Config
+-Pre-commented example entries for L2 switches, Nexus switches, and IOS-XE devices so you know the exact format to add them
+
+
+
+Additional:
+1. Added a third field to each command — the display label
+Each command entry went from (command, scope) to (command, scope, label) where the label includes the emoji and device type prefix, e.g. "🟢 Switch  │ show vlan brief".
+
+2. Three scope categories
+"ROUTER" — router only commands (blue #89b4fa)
+"SWITCH" — switch only commands (green #a6e3a1)
+"ALL" — works on both (white #cdd6f4)
+
+3. Button colors tied to scope
+The loop that builds the buttons reads the scope and assigns fg_color accordingly, so the text color of each button matches its device type.
+
+4. Added a legend above the buttons
+A small row of labels showing 🔵 Router, 🟢 Switch, 🔀 Both so the user knows what the colors mean without guessing.
